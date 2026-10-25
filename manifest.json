@@ -1,0 +1,12 @@
+
+{
+  "name": "Renungan Harian 366",
+  "short_name": "Renungan 366",
+  "description": "Firman Tuhan untuk setiap langkahmu",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f3ec",
+  "theme_color": "#315c46"
+}
