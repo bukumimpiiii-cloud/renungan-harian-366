@@ -34,19 +34,46 @@ button{width:100%;padding:14px;border:0;border-radius:9px;background:#315c46;col
 <p id="status">Memuat...</p>
 </main>
 <script>
-const API_URL = 'GANTI_DENGAN_URL_WEB_APP_KAMU';
+const API_URL = 'https://script.google.com/macros/s/AKfycbzLuJe9n2i9WOdUm9tbNKmu5wXklvXtHtI2jDUyXUmSwryU_b-siA24RHjGpc1niuOU/exec';
 
-async function muatRenungan(){
-  const status=document.getElementById('status');
-  status.textContent='Memuat renungan...';
-  try{
-    const response=await fetch(API_URL+'?data=renungan');
-    if(!response.ok) throw new Error('HTTP '+response.status);
-    const data=await response.json();
-    if(!data){
-      status.textContent='Renungan hari ini belum tersedia atau belum berstatus Terbit.';
+function muatRenungan() {
+  const status = document.getElementById('status');
+  status.textContent = 'Memuat renungan...';
+
+  const callbackName = 'terimaRenungan' + Date.now();
+
+  window[callbackName] = function(data) {
+    delete window[callbackName];
+
+    if (script.parentNode) script.parentNode.removeChild(script);
+
+    if (!data) {
+      status.textContent =
+        'Renungan hari ini belum tersedia atau belum berstatus Terbit.';
       return;
     }
+
+    ['tanggal', 'tema', 'ayat', 'referensi',
+     'renungan', 'refleksi', 'doa'].forEach(function(key) {
+      document.getElementById(key).textContent = data[key] || '';
+    });
+
+    status.textContent = '';
+  };
+
+  const script = document.createElement('script');
+  script.src = API_URL + '?data=renungan&callback=' + callbackName;
+
+  script.onerror = function() {
+    delete window[callbackName];
+    status.textContent =
+      'Koneksi gagal. Periksa URL Web App dan deployment Apps Script.';
+    if (script.parentNode) script.parentNode.removeChild(script);
+  };
+
+  document.body.appendChild(script);
+}
+
     for(const key of ['tanggal','tema','ayat','referensi','renungan','refleksi','doa']){
       document.getElementById(key).textContent=data[key]||'';
     }
