@@ -73,15 +73,7 @@ function muatRenungan() {
 
   document.body.appendChild(script);
 }
-
-    for(const key of ['tanggal','tema','ayat','referensi','renungan','refleksi','doa']){
-      document.getElementById(key).textContent=data[key]||'';
-    }
-    status.textContent='';
-  }catch(error){
-    status.textContent='Data belum terhubung. Perlu mengaktifkan endpoint Apps Script.';
-  }
-}
+  
 muatRenungan();
 </script>
 </body>
