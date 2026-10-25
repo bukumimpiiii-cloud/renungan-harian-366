@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#315c46">
+  <title>Renungan Harian 366</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f3ec;
+      color: #29372e;
+    }
+    header {
+      background: #315c46;
+      color: white;
+      text-align: center;
+      padding: 30px 18px;
+    }
+    header h1 { margin: 0 0 8px; font-size: 25px; }
+    header p { margin: 0; font-size: 14px; }
+    main { max-width: 680px; margin: 22px auto; padding: 0 16px 32px; }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 12px #0000000a;
+    }
+    .date { color: #607b66; font-size: 14px; }
+    h2 { font-size: 23px; line-height: 1.4; }
+    h3 { color: #315c46; margin-bottom: 8px; }
+    p { line-height: 1.7; white-space: pre-line; }
+    button {
+      width: 100%; padding: 14px; border: 0;
+      border-radius: 10px; background: #315c46;
+      color: white; font-size: 16px; cursor: pointer;
+    }
+    #status { text-align: center; color: #607b66; font-size: 14px; }
+    footer { text-align: center; padding: 18px; color: #68766c; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌿 Renungan Harian</h1>
+    <p>Firman Tuhan untuk menemani setiap langkahmu</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="date" id="tanggal">Renungan hari ini</div>
+      <h2 id="tema">Selamat datang</h2>
+      <p id="ayat">Renungan harian akan ditampilkan di sini.</p>
+      <p id="referensi"></p>
+    </section>
+
+    <section class="card">
+      <h3>Renungan</h3>
+      <p id="renungan">Memuat renungan...</p>
+    </section>
+
+    <section class="card">
+      <h3>Refleksi</h3>
+      <p id="refleksi">—</p>
+    </section>
+
+    <section class="card">
+      <h3>Doa</h3>
+      <p id="doa">—</p>
+    </section>
+
+    <button onclick="muatRenungan()">Muat Ulang Renungan</button>
+    <p id="status">Aplikasi Renungan Harian · 366 Hari</p>
+  </main>
+
+  <footer>Renungan Harian Alkitab · 366 Hari</footer>
+
+  <script>
+    function muatRenungan() {
+      document.getElementById('status').textContent =
+        'Menghubungkan ke database renungan...';
+
+      // Koneksi database akan kita pasang pada langkah berikutnya.
+      document.getElementById('status').textContent =
+        'Tampilan siap. Koneksi data sedang disiapkan.';
+    }
+  </script>
+</body>
+</html>
