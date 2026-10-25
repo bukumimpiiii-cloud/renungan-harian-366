@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#315c46">
+<link rel="manifest" href="./manifest.json">  
 <title>Renungan Harian 366</title>
 <style>
 body{margin:0;font-family:Arial,sans-serif;background:#f5f3ec;color:#29372e}
@@ -75,6 +76,15 @@ function muatRenungan() {
 }
   
 muatRenungan();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js')
+      .catch(function(error) {
+        console.error('Service worker gagal:', error);
+      });
+  });
+}
 </script>
 </body>
 </html>
