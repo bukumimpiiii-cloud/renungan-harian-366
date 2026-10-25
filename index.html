@@ -62,7 +62,7 @@ function muatRenungan() {
   };
 
   const script = document.createElement('script');
-  script.src = API_URL + '?data=renungan&callback=' + callbackName;
+ script.src = API_URL + '?data=renungan&test=1&callback=' + callbackName;
 
   script.onerror = function() {
     delete window[callbackName];
