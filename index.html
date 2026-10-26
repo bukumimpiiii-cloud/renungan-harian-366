@@ -2,223 +2,278 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#315c46">
-<link rel="manifest" href="./manifest.json">  
-<title>Renungan Harian 366</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#315c46">
+  <title>Water of Life — Renungan Harian</title>
+  <style>
+    * { box-sizing: border-box; }
 
-:root {
-  --hijau: #176b82;
-  --hijau-muda: #258da3;
-  --krem: #e8f7fa;
-  --putih: #f5fcfd;
-  --emas: #c5a568;
-  --teks: #303b32;
-  --teks-lembut: #73786f;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  background: var(--krem);
-  color: var(--teks);
-  font-size: 16px;
-}
-
-header {
-  background: var(--hijau);
-  color: var(--putih);
-  text-align: center;
-  padding: 38px 20px 34px;
-  border-bottom: 4px solid var(--emas);
-}
-
-header h1 {
-  margin: 0 0 10px;
-  font-size: 30px;
-  font-weight: normal;
-  letter-spacing: 1px;
-}
-
-header p {
-  margin: 0;
-  color: #e5dfd1;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-
-main {
-  max-width: 680px;
-  margin: 26px auto;
-  padding: 0 16px 32px;
-}
-
-
-.card {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 24px 8px;
-  margin-bottom: 0;
-  box-shadow: none;
-  border-bottom: 1px solid #8ecbd8;
-}
-
-
-h2, h3 {
-  color: var(--hijau);
-  font-weight: normal;
-}
-
-h3 {
-  font-size: 20px;
-  margin-top: 0;
-  margin-bottom: 14px;
-}
-
-p {
-  line-height: 1.9;
-  white-space: pre-line;
-}
-
-#ayat {
-  color: var(--hijau);
-  font-size: 20px;
-  line-height: 1.9;
-  font-style: italic;
-}
-
-#referensi {
-  color: #98763d;
-  font-size: 14px;
-  text-align: right;
-}
-
-button {
-  width: 100%;
-  padding: 15px;
-  border: 1px solid var(--emas);
-  border-radius: 5px;
-  background: var(--hijau);
-  color: white;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:active {
-  background: var(--hijau-muda);
-}
-
-#status {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  color: var(--teks-lembut);
-  padding: 10px;
-}
-
-@media (max-width: 480px) {
-  header {
-    padding: 32px 16px 28px;
-  }
-
-  header h1 {
-    font-size: 26px;
-  }
-
-  main {
-    margin-top: 18px;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .card {
-    padding: 21px 18px;
-  }
-
-  #ayat {
-    font-size: 19px;
-  }
-}
-
-</style>
-</head>
-<body>
-<header>
-<h1>🌿 Renungan Harian</h1>
-<p>Firman Tuhan untuk setiap langkahmu</p>
-</header>
-<main>
-<div class="card">
-<p id="tanggal">Renungan hari ini</p>
-<h2 id="tema">Renungan Harian</h2>
-<p id="ayat"></p><p id="referensi"></p>
-</div>
-<div class="card"><h3>Renungan</h3><p id="renungan"></p></div>
-<div class="card"><h3>Refleksi</h3><p id="refleksi"></p></div>
-<div class="card"><h3>Doa</h3><p id="doa"></p></div>
-<button onclick="muatRenungan()">Muat Ulang Renungan</button>
-<p id="status">Memuat...</p>
-</main>
-<script>
-const API_URL = 'https://script.google.com/macros/s/AKfycbzLuJe9n2i9WOdUm9tbNKmu5wXklvXtHtI2jDUyXUmSwryU_b-siA24RHjGpc1niuOU/exec';
-
-function muatRenungan() {
-  const status = document.getElementById('status');
-  status.textContent = 'Memuat renungan...';
-
-  const callbackName = 'terimaRenungan' + Date.now();
-
-  window[callbackName] = function(data) {
-    delete window[callbackName];
-
-    if (script.parentNode) script.parentNode.removeChild(script);
-
-    if (!data) {
-      status.textContent =
-        'Renungan hari ini belum tersedia atau belum berstatus Terbit.';
-      return;
+    body {
+      margin: 0;
+      padding: 24px 14px;
+      background: #e9e5d9;
+      color: #30382e;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
-    ['tanggal', 'tema', 'ayat', 'referensi',
-     'renungan', 'refleksi', 'doa'].forEach(function(key) {
-      document.getElementById(key).textContent = data[key] || '';
-    });
+    .book {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fffdf6;
+      border: 1px solid #d8d0bd;
+      border-radius: 5px 16px 16px 5px;
+      box-shadow: 0 8px 28px #263a2b20;
+      overflow: hidden;
+    }
 
-    status.textContent = '';
-  };
+    header {
+      padding: 34px 24px 28px;
+      background: #315c46;
+      color: #fffdf6;
+      text-align: center;
+    }
 
-  const script = document.createElement('script'); 
-script.src = API_URL + '?data=renungan&callback=' + callbackName;
+    .brand {
+      margin: 0 0 10px;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
 
+    header h1 {
+      margin: 0;
+      font-size: clamp(27px, 5vw, 38px);
+      font-weight: normal;
+    }
 
-  script.onerror = function() {
-    delete window[callbackName];
-    status.textContent =
-      'Koneksi gagal. Periksa URL Web App dan deployment Apps Script.';
-    if (script.parentNode) script.parentNode.removeChild(script);
-  };
+    header p {
+      margin: 12px 0 0;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+    }
 
-  document.body.appendChild(script);
-}
-  
-muatRenungan();
+    main { padding: 28px clamp(20px, 6vw, 52px) 36px; }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js')
-      .catch(function(error) {
-        console.error('Service worker gagal:', error);
-      });
-  });
-}
-</script>
+    .date {
+      color: #657a61;
+      font: 13px/1.6 Arial, sans-serif;
+      text-align: center;
+    }
+
+    h2 {
+      margin: 12px 0 22px;
+      color: #315c46;
+      font-size: clamp(25px, 5vw, 34px);
+      font-weight: normal;
+      line-height: 1.3;
+      text-align: center;
+    }
+
+    .verse {
+      margin: 0 0 28px;
+      padding: 22px 18px;
+      border-top: 1px solid #d9d4c5;
+      border-bottom: 1px solid #d9d4c5;
+      text-align: center;
+    }
+
+    .section-label {
+      margin: 0 0 12px;
+      color: #567253;
+      font: bold 12px/1.5 Arial, sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .verse-text {
+      margin: 0;
+      font-size: 19px;
+      font-style: italic;
+      line-height: 1.85;
+      white-space: pre-line;
+    }
+
+    .reference {
+      margin: 12px 0 0;
+      color: #647360;
+      font: 13px/1.6 Arial, sans-serif;
+    }
+
+    section { margin: 30px 0; }
+
+    section h3 {
+      margin: 0 0 12px;
+      color: #315c46;
+      font-size: 22px;
+      font-weight: normal;
+    }
+
+    section p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.9;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .prayer {
+      padding: 22px;
+      background: #f3f0e5;
+      border-left: 3px solid #78916d;
+    }
+
+    .prayer h3 { margin-top: 0; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    button {
+      padding: 13px 12px;
+      border: 1px solid #315c46;
+      border-radius: 7px;
+      background: #315c46;
+      color: white;
+      font: 14px Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: transparent;
+      color: #315c46;
+    }
+
+    button:disabled { opacity: .6; cursor: wait; }
+
+    #status {
+      min-height: 22px;
+      margin: 18px 0 0;
+      color: #657a61;
+      font: 13px/1.6 Arial, sans-serif;
+      text-align: center;
+    }
+
+    footer {
+      padding: 18px;
+      border-top: 1px solid #e4dfd1;
+      color: #7a8074;
+      font: 12px/1.6 Arial, sans-serif;
+      text-align: center;
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 10px 7px; }
+      main { padding: 24px 20px 28px; }
+      .actions { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <article class="book">
+    <header>
+      <p class="brand">Water of Life</p>
+      <h1>Renungan Harian</h1>
+      <p>Firman Tuhan untuk menemani setiap langkahmu</p>
+    </header>
+
+    <main>
+      <div class="date" id="tanggal">Memuat tanggal...</div>
+      <h2 id="tema">Renungan Harian</h2>
+
+      <div class="verse">
+        <p class="section-label">Firman Tuhan</p>
+        <p class="verse-text" id="ayat">Memuat ayat...</p>
+        <p class="reference" id="referensi"></p>
+      </div>
+
+      <section>
+        <h3>Renungan</h3>
+        <p id="renungan">Memuat renungan...</p>
+      </section>
+
+      <section>
+        <h3>Refleksi</h3>
+        <p id="refleksi">—</p>
+      </section>
+
+      <section class="prayer">
+        <h3>Doa</h3>
+        <p id="doa">—</p>
+      </section>
+
+      <div class="actions">
+        <button id="tombolMuat" onclick="muatRenungan()">Muat Ulang</button>
+        <button class="secondary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Kembali ke Atas</button>
+      </div>
+
+      <p id="status" role="status" aria-live="polite"></p>
+    </main>
+
+    <footer>Water of Life · Renungan Harian Alkitab</footer>
+  </article>
+
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzLuJe9n2i9WOdUm9tbNKmu5wXklvXtHtI2jDUyXUmSwryU_b-siA24RHjGpc1niuOU/exec?data=renungan';
+
+    function isi(id, nilai) {
+      document.getElementById(id).textContent = nilai || '—';
+    }
+
+    async function muatRenungan() {
+      const status = document.getElementById('status');
+      const tombol = document.getElementById('tombolMuat');
+
+      status.textContent = 'Memuat renungan...';
+      tombol.disabled = true;
+
+      try {
+        const pemisah = API_URL.includes('?') ? '&' : '?';
+        const response = await fetch(
+          API_URL + pemisah + '_=' + Date.now(),
+          { cache: 'no-store' }
+        );
+
+        if (!response.ok) {
+          throw new Error('Server memberi respons ' + response.status);
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.tema) {
+          isi('tema', 'Renungan Belum Tersedia');
+          isi('tanggal', '');
+          isi('ayat', 'Renungan hari ini belum tersedia atau belum berstatus Terbit.');
+          isi('referensi', '');
+          isi('renungan', 'Silakan kembali lagi nanti.');
+          isi('refleksi', '—');
+          isi('doa', '—');
+          status.textContent = '';
+          return;
+        }
+
+        isi('tanggal', data.tanggal);
+        isi('tema', data.tema);
+        isi('ayat', data.ayat);
+        isi('referensi', data.referensi);
+        isi('renungan', data.renungan);
+        isi('refleksi', data.refleksi);
+        isi('doa', data.doa);
+        status.textContent = '';
+      } catch (error) {
+        status.textContent =
+          'Renungan gagal dimuat. Periksa koneksi internet lalu coba Muat Ulang.';
+        console.error('Gagal memuat renungan:', error);
+      } finally {
+        tombol.disabled = false;
+      }
+    }
+
+    window.addEventListener('load', muatRenungan);
+  </script>
 </body>
 </html>
